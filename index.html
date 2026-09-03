@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Skalo.id · Segera Hadir</title>
-<meta name="description" content="Deploy, compute, dan database dalam satu ekosistem. Skalo.id segera hadir buat developer Indonesia.">
+<meta name="description" content="Deploy aplikasi ke production dalam lima menit. Skalo.id segera tersedia untuk developer Indonesia.">
 <meta property="og:title" content="Skalo.id · Segera Hadir">
-<meta property="og:description" content="Deploy, compute, dan database dalam satu ekosistem.">
+<meta property="og:description" content="Deploy aplikasi ke production dalam lima menit.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1B6EF3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id=%22g%22%20x1=%220%22%20y1=%220%22%20x2=%220%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%233585FF%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%230B4FD1%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%229%22%20fill=%22url%28%23g%29%22/%3E%3Cpath%20d=%22M19.9%2012.6C19.9%2010.2%2012.1%2010.2%2012.1%2013.2C12.1%2016.1%2019.9%2015.5%2019.9%2018.8C19.9%2021.9%2012.1%2021.9%2012.1%2019.5%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%223.0%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
@@ -179,20 +179,20 @@ footer{
     <div class="hero-copy">
       <span class="eyebrow rise d1"><b>SKALO.ID</b><span>Cloud Deployment &amp; Infrastructure</span></span>
       <h1 class="rise d2">Deploy, compute, dan database <em>dalam satu ekosistem.</em></h1>
-      <p class="lede rise d3">Cloud buat kamu yang rutin ngirim aplikasi ke production. Tulis nama kamu, nanti kami kabari duluan.</p>
+      <p class="lede rise d3">Deploy aplikasi ke production dalam lima menit.</p>
 
       <form class="rise d4" novalidate>
-        <label class="sr" for="nama">Nama kamu</label>
+        <label class="sr" for="nama">Nama lengkap</label>
         <input id="nama" name="nama" type="text" autocomplete="name" maxlength="80"
-               placeholder="Nama kamu" required>
+               placeholder="Nama lengkap" required>
         <button type="submit">
-          Kabari Saya Duluan
+          Daftar Akses Awal
           <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
       </form>
-      <p class="form-note rise d4" id="note" role="status">Tombolnya bakal buka aplikasi email kamu. Isinya sudah kami siapkan, tinggal kirim.</p>
+      <p class="form-note rise d4" id="note" role="status">Pendaftaran akan dibuka dalam waktu dekat. Tombol ini membuka aplikasi email dengan pesan yang sudah disiapkan.</p>
     </div>
   </div>
 </main>
@@ -216,11 +216,11 @@ function clean(name) {
 function buildMailto(name) {
   const subject = 'Daftar akses awal Skalo.id';
   const body = [
-    'Hai tim Skalo.id,',
+    'Kepada tim Skalo.id,',
     '',
-    'Saya ' + name + ', mau ikut daftar akses awal Skalo.id.',
+    'Saya ' + name + '. Saya ingin mendaftar untuk akses awal Skalo.id.',
     '',
-    'Terima kasih,',
+    'Hormat saya,',
     name,
   ].join('\n');
   return 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
@@ -231,12 +231,12 @@ form.addEventListener('submit', e => {
   const name = clean(input.value);
   if (name.length < 2) {
     note.classList.remove('ok');
-    note.textContent = 'Nama kamu belum keisi. Tulis dulu ya, biar kami tahu mau manggil siapa.';
+    note.textContent = 'Nama belum diisi. Masukkan nama untuk melanjutkan.';
     input.focus();
     return;
   }
   note.classList.add('ok');
-  note.textContent = 'Oke ' + name + ', aplikasi email kamu kami bukain. Tinggal tekan kirim.';
+  note.textContent = 'Aplikasi email dibuka dengan pesan untuk ' + name + '. Kirim pesan tersebut untuk menyelesaikan pendaftaran.';
   window.location.href = buildMailto(name);
 });
 
@@ -247,7 +247,7 @@ if (location.hash === '#selftest') {
   const lines = u => (u.match(/%0A/g) || []).length;
   console.assert(lines(buildMailto(clean('a\nbcc: evil@x.com'))) === lines(buildMailto('a')), 'a pasted newline adds no line to the body');
   console.assert(buildMailto('Yuka').startsWith('mailto:marketing@skalo.id?subject='), 'addresses marketing@');
-  console.assert(buildMailto('Yuka').includes(encodeURIComponent('Saya Yuka,')), 'name lands in the body');
+  console.assert(buildMailto('Yuka').includes(encodeURIComponent('Saya Yuka.')), 'name lands in the body');
   console.log('selftest done');
 }
 </script>
